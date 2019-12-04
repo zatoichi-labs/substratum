@@ -51,4 +51,6 @@ class HTTPProvider(JSONBaseProvider):
             **self.get_request_kwargs()
         )
         response = self.decode_rpc_response(raw_response)
+        if 'error' in response:
+            raise ValueError(f"Error calling `{method}({params})`: {response['error']['message']}")
         return response['result']
