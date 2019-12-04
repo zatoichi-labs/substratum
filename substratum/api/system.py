@@ -1,5 +1,15 @@
+from typing import (
+    List,
+)
+
 from substratum.providers import (
     BaseProvider,
+)
+from substratum.types import (
+    ChainProperties,
+    Health,
+    NetworkState,
+    PeerInfo,
 )
 
 from .module import (
@@ -17,3 +27,23 @@ class System(Module):
     @property
     def name(self) -> str:
         return self._provider.make_request("system_name", [])
+
+    @property
+    def chain(self) -> str:
+        return self._provider.make_request("system_chain", [])
+
+    @property
+    def health(self) -> Health:
+        return self._provider.make_request("system_health", [])
+
+    @property
+    def networkState(self) -> NetworkState:
+        return self._provider.make_request("system_networkState", [])
+
+    @property
+    def peers(self) -> List[PeerInfo]:
+        return self._provider.make_request("system_peers", [])
+
+    @property
+    def properties(self) -> ChainProperties:
+        return self._provider.make_request("system_properties", [])

@@ -1,5 +1,6 @@
 from typing import (
     Any,
+    Dict,
     List,
     Literal,
     NewType,
@@ -70,6 +71,44 @@ RuntimeVersion = TypedDict("RuntimeVersion", {
     "implVersion": int,
     "specName": str,
     "specVersion": int,
+})
+
+
+ChainProperties = TypedDict("ChainProperties", {
+})
+
+
+Health = TypedDict("Health", {
+    'isSyncing': bool,
+    'peers': int,
+    'shouldHavePeers': bool,
+})
+
+
+PeerInfo = TypedDict("PeerInfo", {
+})
+
+
+LibP2PURI = NewType('LibP2PURI', str)
+
+
+PeerId = NewType("PeerId", str)
+
+PeerSet = TypedDict("PeerSet", {
+    'message_queue': int,
+    'nodes': Dict[PeerId, PeerInfo],
+    'reserved_only': bool,
+})
+
+NetworkState = TypedDict("NetworkState", {
+    'averageDownloadPerSec': int,
+    'averageUploadPerSec': int,
+    'connectedPeers': Dict[PeerId, PeerInfo],
+    'externalAddresses': List[LibP2PURI],
+    'listenedAddresses': List[LibP2PURI],
+    'notConnectedPeers': Dict[PeerId, PeerInfo],
+    'peerId': PeerId,
+    'peerset': PeerSet,
 })
 
 
