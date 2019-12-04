@@ -33,6 +33,7 @@ setup(
     author_email='admin@zatoichi-labs.com',
     url='https://github.com/zatoichi-labs/substratum',
     install_requires=[
+        "eth-utils>=1.8,<2.0",
     ],
     setup_requires=['setuptools-markdown'],
     python_requires='>=3.8,<4',
