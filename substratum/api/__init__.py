@@ -1,3 +1,6 @@
+from .account import (
+    Account,
+)
 from .chain import (
     Chain,
 )
@@ -12,6 +15,7 @@ from .system import (
 )
 
 __all__ = [
+    "Account",
     "Chain",
     "Module",
     "State",

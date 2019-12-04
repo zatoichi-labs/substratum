@@ -3,6 +3,7 @@ from typing import (
 )
 
 from substratum.api import (
+    Account,
     Chain,
     Module,
     State,
@@ -18,6 +19,7 @@ from substratum.types import (
 
 def get_default_modules() -> Dict[str, Module]:
     return {
+        "account": Account,
         "system": System,
         "chain": Chain,
         "state": State,
