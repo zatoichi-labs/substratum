@@ -12,10 +12,13 @@ from substratum.utils import (
     to_int,
 )
 
+from .module import (
+    Module,
+)
 
-class Chain:
-    def __init__(self, provider: BaseProvider):
-        self.provider = provider
+
+class Chain(Module):
+    provider: BaseProvider
 
     def getHead(self) -> BlockHash:
         return self.provider.make_request("chain_getHead", [])

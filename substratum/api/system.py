@@ -2,10 +2,13 @@ from substratum.providers import (
     BaseProvider,
 )
 
+from .module import (
+    Module,
+)
 
-class System:
-    def __init__(self, provider: BaseProvider):
-        self.provider = provider
+
+class System(Module):
+    provider: BaseProvider
 
     @property
     def version(self) -> str:
