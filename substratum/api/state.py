@@ -10,6 +10,9 @@ from substratum.types import (
     HexStr,
     Metadata,
 )
+from substratum.utils import (
+    decode_metadata,
+)
 
 from .module import (
     Module,
@@ -24,7 +27,8 @@ class State(Module):
     _provider: BaseProvider
 
     def getMetadata(self, block_hash: BlockHash) -> Metadata:
-        return self._provider.make_request("state_getMetadata", [block_hash])
+        raw_metadata = self._provider.make_request("state_getMetadata", [block_hash])
+        return decode_metadata(raw_metadata)
 
     def getStorageAt(self, storage_key: HexStr, block_hash: BlockHash) -> Any:
         # TODO Decode storage using metadata

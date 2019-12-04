@@ -60,12 +60,13 @@ RPCMethods = TypedDict("RPCMethods", {
 })
 
 
-# Encoded via SCALE encoding
-Metadata = NewType("Metadata", HexStr)
+Metadata = TypedDict("Metadata", {
+    # TODO Fill this in
+})
 
 
 RuntimeVersion = TypedDict("RuntimeVersion", {
-    "apis": List[Tuple[HexStr, int]],  # TODO Figure out whaty this is
+    "apis": List[Tuple[HexStr, int]],  # TODO Figure out what this is
     "authoringVersion": int,
     "implName": str,
     "implVersion": int,

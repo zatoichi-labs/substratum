@@ -11,7 +11,16 @@ from eth_utils import (
     to_text,
 )
 
+from scalecodec import (
+    ScaleBytes,
+)
+from scalecodec.metadata import (
+    MetadataDecoder,
+)
+
 from substratum.types import (
+    HexStr,
+    Metadata,
     URI,
 )
 
@@ -33,3 +42,7 @@ def make_post_request(endpoint_uri: URI, data: bytes, *args: Any, **kwargs: Any)
     response.raise_for_status()
 
     return response.content
+
+
+def decode_metadata(raw_metadata: HexStr) -> Metadata:
+    return MetadataDecoder(ScaleBytes(raw_metadata)).decode()
