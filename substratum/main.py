@@ -5,6 +5,7 @@ from typing import (
 from substratum.api import (
     Chain,
     Module,
+    State,
     System,
 )
 from substratum.providers import (
@@ -16,6 +17,7 @@ def get_default_modules() -> Dict[str, Module]:
     return {
         "system": System,
         "chain": Chain,
+        "state": State,
     }
 
 

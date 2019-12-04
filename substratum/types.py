@@ -53,6 +53,10 @@ RPCResponse = TypedDict("RPCResponse", {
 RPCEndpoint = NewType("RPCEndpoint", str)
 
 
+# Encoded via SCALE encoding
+Metadata = NewType("Metadata", HexStr)
+
+
 RuntimeVersion = TypedDict("RuntimeVersion", {
     "apis": List[Tuple[HexStr, int]],  # TODO Figure out whaty this is
     "authoringVersion": int,

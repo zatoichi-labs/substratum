@@ -4,6 +4,9 @@ from .chain import (
 from .module import (
     Module,
 )
+from .state import (
+    State,
+)
 from .system import (
     System,
 )
@@ -11,5 +14,6 @@ from .system import (
 __all__ = [
     "Chain",
     "Module",
+    "State",
     "System",
 ]
