@@ -1,9 +1,39 @@
 from typing import (
     Any,
+    List,
     Literal,
     NewType,
+    Tuple,
     TypedDict,
 )
+
+
+HexStr = NewType('HexStr', str)
+
+
+BlockHash = NewType('BlockHash', HexStr)
+
+
+BlockNumber = NewType('BlockNumber', int)
+
+
+TrieRoot = NewType('TrieRoot', HexStr)
+
+
+BlockHeader = TypedDict('BlockHeader', {
+    "digest": Any,  # TODO Fix this
+    "extrinsicsRoot": TrieRoot,
+    "number": BlockNumber,
+    "parentHash": BlockHash,
+    "stateRoot": TrieRoot,
+})
+
+
+Block = TypedDict("Block", {
+    "extrinsics": List[HexStr],  # TODO Create Extrinsics type
+    "header": BlockHeader,
+    "justification": Any,  # TODO Find out what this is supposed to be
+})
 
 
 RPCError = TypedDict("RPCError", {
@@ -21,6 +51,16 @@ RPCResponse = TypedDict("RPCResponse", {
 
 
 RPCEndpoint = NewType("RPCEndpoint", str)
+
+
+RuntimeVersion = TypedDict("RuntimeVersion", {
+    "apis": List[Tuple[HexStr, int]],  # TODO Figure out whaty this is
+    "authoringVersion": int,
+    "implName": str,
+    "implVersion": int,
+    "specName": str,
+    "specVersion": int,
+})
 
 
 URI = NewType('URI', str)
