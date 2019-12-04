@@ -1,0 +1,2 @@
+class Substratum:
+    pass
