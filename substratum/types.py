@@ -21,3 +21,6 @@ RPCResponse = TypedDict("RPCResponse", {
 
 
 RPCEndpoint = NewType("RPCEndpoint", str)
+
+
+URI = NewType('URI', str)
