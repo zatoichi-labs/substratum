@@ -23,8 +23,8 @@ class Chain(Module):
     def getHead(self) -> BlockHash:
         return self._provider.make_request("chain_getHead", [])
 
-    def getFinalisedHead(self) -> BlockHash:
-        return self._provider.make_request("chain_getFinalisedHead", [])
+    def getFinalizedHead(self) -> BlockHash:
+        return self._provider.make_request("chain_getFinalizedHead", [])
 
     def getBlockHash(self, block_number: BlockNumber) -> BlockHash:
         return self._provider.make_request("chain_getBlockHash", [block_number])
