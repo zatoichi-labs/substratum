@@ -51,4 +51,4 @@ class HTTPProvider(JSONBaseProvider):
             **self.get_request_kwargs()
         )
         response = self.decode_rpc_response(raw_response)
-        return response
+        return response['result']
