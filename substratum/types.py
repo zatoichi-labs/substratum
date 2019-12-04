@@ -53,6 +53,12 @@ RPCResponse = TypedDict("RPCResponse", {
 RPCEndpoint = NewType("RPCEndpoint", str)
 
 
+RPCMethods = TypedDict("RPCMethods", {
+    "methods": List[RPCEndpoint],
+    "version": int,
+})
+
+
 # Encoded via SCALE encoding
 Metadata = NewType("Metadata", HexStr)
 

@@ -11,6 +11,9 @@ from substratum.api import (
 from substratum.providers import (
     BaseProvider,
 )
+from substratum.types import (
+    RPCMethods,
+)
 
 
 def get_default_modules() -> Dict[str, Module]:
@@ -29,3 +32,7 @@ class Substratum:
 
         for namespace, module in modules.items():
             setattr(self, namespace, module(self._provider))
+
+    @property
+    def rpc_methods(self) -> RPCMethods:
+        return self._provider.make_request("rpc_methods", [])
