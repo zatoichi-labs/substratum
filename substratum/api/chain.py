@@ -18,25 +18,25 @@ from .module import (
 
 
 class Chain(Module):
-    provider: BaseProvider
+    _provider: BaseProvider
 
     def getHead(self) -> BlockHash:
-        return self.provider.make_request("chain_getHead", [])
+        return self._provider.make_request("chain_getHead", [])
 
     def getFinalisedHead(self) -> BlockHash:
-        return self.provider.make_request("chain_getFinalisedHead", [])
+        return self._provider.make_request("chain_getFinalisedHead", [])
 
     def getBlockHash(self, block_number: BlockNumber) -> BlockHash:
-        return self.provider.make_request("chain_getBlockHash", [block_number])
+        return self._provider.make_request("chain_getBlockHash", [block_number])
 
     def getHeader(self, block_hash: BlockHash) -> BlockHeader:
-        return self.provider.make_request("chain_getHeader", [block_hash])
+        return self._provider.make_request("chain_getHeader", [block_hash])
 
     def getBlockNumber(self, block_hash: BlockHash) -> BlockNumber:
         return to_int(self.getHeader(block_hash)['number'])
 
     def getBlock(self, block_hash: BlockHash) -> Block:
-        return self.provider.make_request("chain_getBlock", [block_hash])
+        return self._provider.make_request("chain_getBlock", [block_hash])
 
     def getRuntimeVersion(self, block_hash: BlockHash) -> RuntimeVersion:
-        return self.provider.make_request("chain_getRuntimeVersion", [block_hash])
+        return self._provider.make_request("chain_getRuntimeVersion", [block_hash])

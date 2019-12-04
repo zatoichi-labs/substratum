@@ -4,7 +4,7 @@ from substratum.providers import (
 
 
 class Module:
-    provider: BaseProvider
+    _provider: BaseProvider
 
     def __init__(self, provider: BaseProvider) -> None:
-        self.provider = provider
+        self._provider = provider

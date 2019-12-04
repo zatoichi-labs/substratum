@@ -8,12 +8,12 @@ from .module import (
 
 
 class System(Module):
-    provider: BaseProvider
+    _provider: BaseProvider
 
     @property
     def version(self) -> str:
-        return self.provider.make_request("system_version", [])
+        return self._provider.make_request("system_version", [])
 
     @property
     def name(self) -> str:
-        return self.provider.make_request("system_name", [])
+        return self._provider.make_request("system_name", [])
