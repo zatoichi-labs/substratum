@@ -35,6 +35,27 @@ class Substratum:
         for namespace, module in modules.items():
             setattr(self, namespace, module(self._provider))
 
+        # Configure basic testnets
+        chain = self.system.chain
+        if chain == "Development":
+            self.account.add_from_uri("//Alice")
+            self.account.add_from_uri("//Alice//stash")
+            self.account.add_from_uri("//Bob")
+            self.account.add_from_uri("//Bob//stash")
+        elif chain == "Local":
+            self.account.add_from_uri("//Alice")
+            self.account.add_from_uri("//Alice//stash")
+            self.account.add_from_uri("//Bob")
+            self.account.add_from_uri("//Bob//stash")
+            self.account.add_from_uri("//Charlie")
+            self.account.add_from_uri("//Charlie//stash")
+            self.account.add_from_uri("//Dave")
+            self.account.add_from_uri("//Dave//stash")
+            self.account.add_from_uri("//Eve")
+            self.account.add_from_uri("//Eve//stash")
+            self.account.add_from_uri("//Ferdie")
+            self.account.add_from_uri("//Ferdie//stash")
+
     @property
     def rpc_methods(self) -> RPCMethods:
         return self._provider.make_request("rpc_methods", [])
