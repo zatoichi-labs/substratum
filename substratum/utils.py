@@ -1,5 +1,9 @@
+from hashlib import (
+    blake2b as blake2b_hashlib,
+)
 from typing import (
     Any,
+    Union,
 )
 import requests
 
@@ -23,6 +27,14 @@ from substratum.types import (
     Metadata,
     URI,
 )
+
+def blake2b(
+    primitive: Union[bytes, int, bool] = None,
+    hexstr: str = None,
+    text: str = None,
+) -> bytes:
+    return blake2b_hashlib(to_bytes(primitive, hexstr, text)).digest()
+
 
 def construct_user_agent(class_name):
     from substratum import __version__ as version
