@@ -28,14 +28,17 @@ def get_default_modules() -> Dict[str, Module]:
 
 class Substratum:
     _provider: BaseProvider
+    _installed_modules: Dict[str, Module]
 
     def __init__(self, provider: BaseProvider, modules: Dict[str, Module]=None) -> None:
         self._provider = provider
+        self._installed_modules = dict()
         if modules is None:
             modules = get_default_modules()
 
         for namespace, module in modules.items():
             setattr(self, namespace, module(self._provider))
+            self._installed_modules[namespace] = module
 
         # Configure basic testnets
         chain = self.system.chain
@@ -57,6 +60,11 @@ class Substratum:
             self.account.add_from_uri("//Eve//stash")
             self.account.add_from_uri("//Ferdie")
             self.account.add_from_uri("//Ferdie//stash")
+
+
+    @property
+    def installed_modules(self) -> Dict[str, Module]:
+        return self._installed_modules
 
     @property
     def rpc_methods(self) -> RPCMethods:
