@@ -9,6 +9,7 @@ from substratum.types import (
     ChainProperties,
     Health,
     NetworkState,
+    NodeRole,
     PeerInfo,
 )
 
@@ -39,6 +40,10 @@ class System(Module):
     @property
     def networkState(self) -> NetworkState:
         return self._provider.make_request("system_networkState", [])
+
+    @property
+    def nodeRoles(self) -> List[NodeRole]:
+        return self._provider.make_request("system_nodeRoles", [])
 
     @property
     def peers(self) -> List[PeerInfo]:

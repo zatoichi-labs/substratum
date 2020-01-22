@@ -119,4 +119,7 @@ NetworkState = TypedDict("NetworkState", {
 })
 
 
+NodeRole = Literal['Authority']  # TODO What other roles?
+
+
 URI = NewType('URI', str)
