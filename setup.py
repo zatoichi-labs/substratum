@@ -33,9 +33,10 @@ setup(
     author_email='admin@zatoichi-labs.com',
     url='https://github.com/zatoichi-labs/substratum',
     install_requires=[
+        "base58",
         "eth-utils>=1.8,<2.0",
         "scalecodec@https://github.com/polkascan/py-scale-codec/tarball/master#egg=scalecodec",
-        "subkey"
+        "subkey",
     ],
     setup_requires=['setuptools-markdown'],
     python_requires='>=3.8,<4',

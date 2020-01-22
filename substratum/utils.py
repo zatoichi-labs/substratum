@@ -1,3 +1,4 @@
+import base58
 from hashlib import (
     blake2b as blake2b_hashlib,
 )
@@ -34,6 +35,35 @@ def blake2b(
     text: str = None,
 ) -> bytes:
     return blake2b_hashlib(to_bytes(primitive, hexstr, text)).digest()
+
+
+class SS58:
+    CHECKSUM_PREFIX = b'SS58PRE'
+    CHECKSUM_LENGTH = 2
+
+    @classmethod
+    def encode(cls, account_id: bytes, address_format: int = 42):
+        if len(account_id) != 32:
+            raise ValueError(f"Cannot encode {account_id}")
+        encoded_address = to_bytes(address_format) + account_id
+        checksum = blake2b(cls.CHECKSUM_PREFIX + encoded_address)
+        return base58.b58encode(encoded_address + checksum[:cls.CHECKSUM_LENGTH])
+
+    @classmethod
+    def decode(cls, address, address_format: int = 42):
+        decoded_address = base58.b58decode(address)
+        if decoded_address[0] != address_format:
+            raise ValueError("Invalid address format")
+
+        # TODO: Temporary, decode all valid SS58 address types
+        assert len(decoded_address) == 35, f"cannot decode {address}"
+        raw_account_id = decoded_address[1:-cls.CHECKSUM_LENGTH]
+        checksum = blake2b(cls.CHECKSUM_PREFIX + raw_account_id)
+
+        if checksum[:cls.CHECKSUM_LENGTH] != decoded_address[-cls.CHECKSUM_LENGTH:]:
+            raise ValueError("Invalid Checksum")
+
+        return raw_account_id
 
 
 def construct_user_agent(class_name):
