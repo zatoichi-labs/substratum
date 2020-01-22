@@ -5,6 +5,7 @@ from typing import (
 from substratum.api import (
     Account,
     Chain,
+    Meta,
     Module,
     State,
     System,
@@ -39,6 +40,12 @@ class Substratum:
         for namespace, module in modules.items():
             setattr(self, namespace, module(self._provider))
             self._installed_modules[namespace] = module
+
+        metadata = self.state.getMetadata(self.chain.getHead())
+        for raw_module in metadata['modules']:
+            module = Meta(self._provider, raw_module)
+            setattr(self, module.name, module)
+            self._installed_modules[module.name] = module
 
         # Configure basic testnets
         chain = self.system.chain

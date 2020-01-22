@@ -89,4 +89,6 @@ def make_post_request(endpoint_uri: URI, data: bytes, *args: Any, **kwargs: Any)
 
 
 def decode_metadata(raw_metadata: HexStr) -> Metadata:
-    return MetadataDecoder(ScaleBytes(raw_metadata)).decode()
+    metadata_dict = MetadataDecoder(ScaleBytes(raw_metadata)).decode()
+    metadata = metadata_dict['metadata']['MetadataV10']
+    return metadata

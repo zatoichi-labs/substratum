@@ -4,8 +4,10 @@ from typing import (
     List,
     Literal,
     NewType,
+    Optional,
     Tuple,
     TypedDict,
+    Union,
 )
 
 
@@ -40,6 +42,78 @@ Block = TypedDict("Block", {
     "extrinsics": List[HexStr],  # TODO Create Extrinsics type
     "header": BlockHeader,
     "justification": Any,  # TODO Find out what this is supposed to be
+})
+
+
+DocStr = NewType("DocStr", List[str])
+
+
+IntegerType = Literal['u32', 'u64']
+SubstrateType = Literal['Address', 'Bytes', 'Key', 'Balance', 'BalanceOf', 'Moment']
+
+ArgType = Union[SubstrateType, IntegerType, str]
+
+
+Arg = TypedDict("Arg", {
+    "name": str,
+    "type": ArgType,
+})
+
+
+Call = TypedDict("Call", {
+    "name": str,
+    "args": List[Arg],
+    "docs": DocStr,
+})
+
+
+Constant = TypedDict("Constant", {
+    "name": str,
+    "type": ArgType,
+    "value": HexStr,
+    "docs": DocStr,
+})
+
+
+StorageType = NewType("StorageType", Dict)
+
+
+StorageItem = TypedDict("StorageItem", {
+    "name": str,
+    "modifier": Any,
+    "type": StorageType,
+    "fallback": HexStr,
+    "docs": DocStr,
+})
+
+
+Storage = TypedDict("Storage", {
+    "prefix": str,
+    "items": List[StorageItem],
+})
+
+
+Event = TypedDict("Event", {
+    "name": str,
+    "args": List[str],
+    "docs": List[str],
+})
+
+
+Error = TypedDict("Error", {
+    "name": str,
+    "docs": DocStr,
+})
+
+
+Module = TypedDict("Module", {
+    "name": str,
+    "prefix": Optional[str],
+    "storage": Optional[Storage],
+    "calls": Optional[List[Call]],
+    "events": Optional[List[Event]],
+    "constants": List[Constant],
+    "errors": List[Error],
 })
 
 

@@ -4,6 +4,9 @@ from .account import (
 from .chain import (
     Chain,
 )
+from .meta import (
+    Meta,
+)
 from .module import (
     Module,
 )
@@ -17,6 +20,7 @@ from .system import (
 __all__ = [
     "Account",
     "Chain",
+    "Meta",
     "Module",
     "State",
     "System",
