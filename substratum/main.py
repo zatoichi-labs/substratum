@@ -27,6 +27,8 @@ def get_default_modules() -> Dict[str, Module]:
 
 
 class Substratum:
+    _provider: BaseProvider
+
     def __init__(self, provider: BaseProvider, modules: Dict[str, Module]=None) -> None:
         self._provider = provider
         if modules is None:
