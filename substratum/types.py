@@ -12,7 +12,10 @@ from typing import (
 HexStr = NewType('HexStr', str)
 
 
-AccountId = NewType('AccountId', str)
+Address = NewType('Address', str)
+
+
+AccountId = NewType('AccountId', bytes)
 
 
 BlockHash = NewType('BlockHash', HexStr)

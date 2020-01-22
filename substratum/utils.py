@@ -24,6 +24,8 @@ from scalecodec.metadata import (
 )
 
 from substratum.types import (
+    AccountId,
+    Address,
     HexStr,
     Metadata,
     URI,
@@ -42,16 +44,16 @@ class SS58:
     CHECKSUM_LENGTH = 2
 
     @classmethod
-    def encode(cls, account_id: bytes, address_format: int = 42):
+    def encode(cls, account_id: AccountId, address_format: int = 42) -> Address:
         if len(account_id) != 32:
             raise ValueError(f"Cannot encode {account_id}")
         encoded_address = to_bytes(address_format) + account_id
         checksum = blake2b(cls.CHECKSUM_PREFIX + encoded_address)
-        return base58.b58encode(encoded_address + checksum[:cls.CHECKSUM_LENGTH])
+        return base58.b58encode(encoded_address + checksum[:cls.CHECKSUM_LENGTH]).decode("utf-8")
 
     @classmethod
-    def decode(cls, address, address_format: int = 42):
-        decoded_address = base58.b58decode(address)
+    def decode(cls, address: Address, address_format: int = 42) -> AccountId:
+        decoded_address = base58.b58decode(str.encode(address, "utf-8"))
         if decoded_address[0] != address_format:
             raise ValueError("Invalid address format")
 
